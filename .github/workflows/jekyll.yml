@@ -40,16 +40,22 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Clear Jekyll cache
+        run: |
+          rm -rf .jekyll-cache _site
+
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
           JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
+
 
   deploy:
     needs: build
