@@ -1,0 +1,19 @@
+{% assign u = include.username | strip %}
+{% assign lang = site.lang | default: "en" | split: "-" | first %}
+
+<div class="repo p-2 text-center">
+  <a href="https://github.com/{{ u }}" target="_blank" rel="noopener">
+    <img
+      class="only-light w-100"
+      alt="{{ u }} GitHub stats"
+      loading="lazy"
+      src="https://github-stats-alexis.vercel.app/api?username={{ u | uri_escape }}&show_icons=true&theme={{ site.repo_theme_light }}&locale={{ lang }}"
+    >
+    <img
+      class="only-dark w-100"
+      alt="{{ u }} GitHub stats"
+      loading="lazy"
+      src="https://github-stats-alexis.vercel.app/api?username={{ u | uri_escape }}&show_icons=true&theme={{ site.repo_theme_dark }}&locale={{ lang }}"
+    >
+  </a>
+</div>
